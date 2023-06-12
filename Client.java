@@ -17,13 +17,13 @@ public class Client {
             DataInputStream in = new DataInputStream(socket.getInputStream());
 
             boolean escolha = true;
-            String numeroCadeira = null;
+            String cadeiraSelecionada = null;
 
             while (escolha) {
                 System.out.print("Escolha o seu assento: ");
-                numeroCadeira = sc.nextLine();
+                cadeiraSelecionada = sc.nextLine();
 
-                out.writeUTF(numeroCadeira);
+                out.writeUTF(cadeiraSelecionada);
 
                 String resposta = in.readUTF();
                 System.out.println(resposta);
@@ -33,7 +33,7 @@ public class Client {
                 }
             }
 
-            System.out.println("Assento escolhido: " + numeroCadeira);
+            System.out.println("Assento escolhido: " + cadeiraSelecionada);
 
             socket.close();
         } catch (IOException e) {
