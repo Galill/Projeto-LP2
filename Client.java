@@ -23,10 +23,10 @@ public class Client {
 
                 out.writeUTF(cadeiraSelecionada);
 
-                String resposta = in.readUTF();
-                System.out.println(resposta);
+                String respostaServer = in.readUTF();
+                System.out.println(respostaServer);
 
-                if (resposta.equals("Reserva feita!")) {
+                if (respostaServer.equals("Reserva feita!")) {
                     escolha = false;
                 }
             }
