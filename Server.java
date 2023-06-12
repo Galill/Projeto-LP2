@@ -17,7 +17,7 @@ public class Server {
         }
         try {
             ServerSocket server = new ServerSocket(44444);
-            System.out.println("Servidor aguardando conexões...");
+            System.out.println("Aguardando conexões...");
 
             while (true) {
                 Socket client = server.accept();
