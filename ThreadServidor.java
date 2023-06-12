@@ -1,5 +1,3 @@
-package ProjetoLP2;
-
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -22,18 +20,18 @@ public class ThreadServidor extends Thread {
             DataOutputStream out = new DataOutputStream(client.getOutputStream());
 
             boolean escolha = true;
-            String numeroCadeira = null;
+            String cadeiraSelecionada = null;
 
             while (escolha) {
-                numeroCadeira = in.readUTF();
+                cadeiraSelecionada = in.readUTF();
 
                 String respostaServer;
 
-                if (Cadeiras.containsKey(numeroCadeira)) {
-                    if (Cadeiras.get(numeroCadeira)) {
+                if (Cadeiras.containsKey(cadeiraSelecionada)) {
+                    if (Cadeiras.get(cadeiraSelecionada)) {
                         respostaServer = "Assento ocupado!";
                     } else {
-                        Cadeiras.put(numeroCadeira, true);
+                        Cadeiras.put(cadeiraSelecionada, true);
                         respostaServer = "Reserva feita!";
                         escolha = false;
                     }
