@@ -33,8 +33,11 @@ public class ThreadServidor extends Thread {
                     } else {
                         Cadeiras.put(cadeiraSelecionada, true);
                         respostaServer = "Reserva feita!";
-                        escolha = false;
+                       
                     }
+                } else if (cadeiraSelecionada.equalsIgnoreCase("sair")){
+                    respostaServer = "Reserva feita!";
+                    escolha = false;
                 } else {
                     respostaServer = "Assento inválido!";
                 }
