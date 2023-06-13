@@ -29,7 +29,6 @@ public class Client {
                 System.out.println(respostaServer);
 
                 if (respostaServer.equals("Reserva feita!")) {
-                    System.out.println("Assento escolhido: " + cadeiraSelecionada);
                     if(!cadeiraSelecionada.equalsIgnoreCase("sair")){
                         totalCadeiras.add(cadeiraSelecionada);
                     }
