@@ -29,9 +29,7 @@ public class Client {
                 System.out.println(respostaServer);
 
                 if (respostaServer.equals("Reserva feita!")) {
-                    if(!cadeiraSelecionada.equalsIgnoreCase("sair")){
                         totalCadeiras.add(cadeiraSelecionada);
-                    }
                 }
 
                 if (cadeiraSelecionada.equalsIgnoreCase("sair")){
@@ -45,5 +43,6 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        sc.close();
     }
 }
