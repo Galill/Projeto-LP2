@@ -2,6 +2,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Client {
@@ -16,6 +17,7 @@ public class Client {
 
             boolean escolha = true;
             String cadeiraSelecionada = null;
+            ArrayList<String> totalCadeiras = new ArrayList<>();
 
             while (escolha) {
                 System.out.print("Escolha o seu assento: ");
@@ -27,11 +29,18 @@ public class Client {
                 System.out.println(respostaServer);
 
                 if (respostaServer.equals("Reserva feita!")) {
+                    System.out.println("Assento escolhido: " + cadeiraSelecionada);
+                    if(!cadeiraSelecionada.equalsIgnoreCase("sair")){
+                        totalCadeiras.add(cadeiraSelecionada);
+                    }
+                }
+
+                if (cadeiraSelecionada.equalsIgnoreCase("sair")){
                     escolha = false;
+                    System.out.println("Assentos escolhidos: ");
+                        System.out.println(totalCadeiras);
                 }
             }
-
-            System.out.println("Assento escolhido: " + cadeiraSelecionada);
 
             socket.close();
         } catch (IOException e) {
