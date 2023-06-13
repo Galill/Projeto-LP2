@@ -36,7 +36,7 @@ public class ThreadServidor extends Thread {
                        
                     }
                 } else if (cadeiraSelecionada.equalsIgnoreCase("sair")){
-                    respostaServer = "Reserva feita!";
+                    respostaServer = "Obrigado por voar conosco!";
                     escolha = false;
                 } else {
                     respostaServer = "Assento inválido!";
