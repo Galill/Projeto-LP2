@@ -6,11 +6,30 @@ import java.util.Map;
 
 public class ThreadServidor extends Thread {
     private Socket client;
-    private Map<String, Boolean> Cadeiras;
+    private static Map<String, Boolean> Cadeiras;
 
     public ThreadServidor(Socket client, Map<String, Boolean> Cadeiras) {
         this.client = client;
-        this.Cadeiras = Cadeiras;
+        ThreadServidor.Cadeiras = Cadeiras;
+    }
+
+    public static synchronized String reservarCadeiras(String cadeiraSelecionada){
+        String respostaServer;
+        
+        if (Cadeiras.containsKey(cadeiraSelecionada)) {
+                    if (Cadeiras.get(cadeiraSelecionada)) {
+                        respostaServer = "Assento ocupado!";
+                    } else {
+                        Cadeiras.put(cadeiraSelecionada, true);
+                        respostaServer = "Reserva feita!";
+                    }
+                } else if (cadeiraSelecionada.equalsIgnoreCase("sair")){
+                    respostaServer = "Obrigado por voar conosco!";
+                } else {
+                    respostaServer = "Assento inválido!";
+                }
+
+        return respostaServer;
     }
 
     @Override
@@ -25,24 +44,11 @@ public class ThreadServidor extends Thread {
             while (escolha) {
                 cadeiraSelecionada = in.readUTF();
 
-                String respostaServer;
-
-                if (Cadeiras.containsKey(cadeiraSelecionada)) {
-                    if (Cadeiras.get(cadeiraSelecionada)) {
-                        respostaServer = "Assento ocupado!";
-                    } else {
-                        Cadeiras.put(cadeiraSelecionada, true);
-                        respostaServer = "Reserva feita!";
-                       
-                    }
-                } else if (cadeiraSelecionada.equalsIgnoreCase("sair")){
-                    respostaServer = "Obrigado por voar conosco!";
+                out.writeUTF(reservarCadeiras(cadeiraSelecionada));
+                
+                if(reservarCadeiras(cadeiraSelecionada).equalsIgnoreCase("sair")){
                     escolha = false;
-                } else {
-                    respostaServer = "Assento inválido!";
                 }
-
-                out.writeUTF(respostaServer);
             }
 
             client.close();
