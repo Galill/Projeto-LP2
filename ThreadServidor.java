@@ -13,23 +13,25 @@ public class ThreadServidor extends Thread {
         this.Cadeiras = Cadeiras;
     }
 
-    public synchronized String reservarCadeiras(String cadeiraSelecionada){
+    public String reservarCadeiras(String cadeiraSelecionada){
         String respostaServer;
         
-        if (Cadeiras.containsKey(cadeiraSelecionada)) {
+        synchronized (Cadeiras) {
+            if (Cadeiras.containsKey(cadeiraSelecionada)) {
                     if (Cadeiras.get(cadeiraSelecionada)) {
                         respostaServer = "Assento ocupado!";
                     } else {
                         Cadeiras.put(cadeiraSelecionada, true);
                         respostaServer = "Reserva feita!";
                     }
-                } else if (cadeiraSelecionada.equalsIgnoreCase("sair")){
-                    respostaServer = "Obrigado por voar conosco!";
-                } else {
-                    respostaServer = "Assento inválido!";
-                }
+            } else if (cadeiraSelecionada.equalsIgnoreCase("sair")){
+                respostaServer = "Obrigado por voar conosco!";
+            } else {
+                respostaServer = "Assento inválido!";
+            }
 
         return respostaServer;
+        }
     }
 
     @Override
@@ -46,7 +48,7 @@ public class ThreadServidor extends Thread {
 
                 out.writeUTF(reservarCadeiras(cadeiraSelecionada));
                 
-                if(reservarCadeiras(cadeiraSelecionada).equalsIgnoreCase("sair")){
+                if(cadeiraSelecionada.equalsIgnoreCase("sair")){
                     escolha = false;
                 }
             }
