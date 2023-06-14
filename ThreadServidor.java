@@ -6,14 +6,14 @@ import java.util.Map;
 
 public class ThreadServidor extends Thread {
     private Socket client;
-    private static Map<String, Boolean> Cadeiras;
+    private Map<String, Boolean> Cadeiras;
 
     public ThreadServidor(Socket client, Map<String, Boolean> Cadeiras) {
         this.client = client;
-        ThreadServidor.Cadeiras = Cadeiras;
+        this.Cadeiras = Cadeiras;
     }
 
-    public static synchronized String reservarCadeiras(String cadeiraSelecionada){
+    public synchronized String reservarCadeiras(String cadeiraSelecionada){
         String respostaServer;
         
         if (Cadeiras.containsKey(cadeiraSelecionada)) {
